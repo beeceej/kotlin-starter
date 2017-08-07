@@ -2,6 +2,7 @@
 ### Gradle template
 .gradle
 build/
+out/
 
 # Idea
 .idea/
