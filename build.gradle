@@ -1,0 +1,52 @@
+group 'kotlin-starter'
+version '1.0.0'
+
+buildscript {
+    ext.kotlin_version = '1.1.3-2'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+    dependencies {
+        // Needed for the 'kotlin' plugin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // Needed for the 'org.springframework.boot' plugin
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE"
+        // Needed for the 'kotlin-spring' plugin
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+    }
+}
+// Allows us to compile Kotlin files
+apply plugin: 'kotlin'
+// Does some extra work to set up Spring Boot.
+// Specifically this gives us the "bootRun" task we will be using
+apply plugin: 'org.springframework.boot'
+// Allows for improved interop between Kotlin and Spring
+apply plugin: 'kotlin-spring'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile "org.springframework.boot:spring-boot-starter-jetty"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "3.5"
+}
