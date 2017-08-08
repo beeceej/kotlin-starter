@@ -8,9 +8,6 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-    dependencies {
         // Needed for the 'kotlin' plugin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // Needed for the 'org.springframework.boot' plugin
@@ -33,11 +30,9 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    compile("org.springframework.boot:spring-boot-starter-web") {
-//        exclude module: "spring-boot-starter-tomcat"
-    }
-//    compile "org.springframework.boot:spring-boot-starter-jetty"
-//    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
 compileKotlin {
